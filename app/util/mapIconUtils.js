@@ -60,7 +60,7 @@ function getImageFromSpriteAsync(icon, width, height, fill) {
   });
 }
 
-const getImageFromSpriteCache = memoize(
+export const getImageFromSpriteCache = memoize(
   getImageFromSpriteAsync,
   (icon, w, h, fill) => `${icon}_${w}_${h}_${fill}`,
 );

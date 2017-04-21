@@ -31,6 +31,13 @@ class ItineraryTab extends React.Component {
 
   shouldComponentUpdate = () => false
 
+  onPrint = (e) => {
+    e.stopPropagation();
+    System.import('../util/itineraryPrinter').then((printer) => {
+      printer.print(this.props.itinerary);
+    });
+  }
+
   getState = () => ({
     lat: this.state.lat || this.props.itinerary.legs[0].from.lat,
     lon: this.state.lon || this.props.itinerary.legs[0].from.lon,
@@ -77,6 +84,7 @@ class ItineraryTab extends React.Component {
             {config.showTicketInformation &&
               <TicketInformation fares={this.props.itinerary.fares} />}
             {routeInformation}
+            <div onClick={this.onPrint}>Print</div>
           </div>
         </div>
       </div>
